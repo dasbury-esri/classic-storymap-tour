@@ -229,3 +229,13 @@ pip-log.txt
 
 sftp-config.json
 sftp-config-alt.json
+
+##############
+## Copilot prompts
+##############
+.copilot/prompts/
+
+##############
+## VSCode settings
+##############
+.vscode/
