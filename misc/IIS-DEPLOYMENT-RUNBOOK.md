@@ -12,6 +12,7 @@ Deploy a viewer-only Classic Map Tour build to /templates/maptour with public ap
 In MapTour/src/index.html, keep these values for IIS viewer deployment:
 - appid: ""
 - allowAnyAppIdInProd: true
+- allowAnyWebmapInProd: true
 - viewerOnlyInProd: true
 
 ### Build and Package Boundary
@@ -75,6 +76,26 @@ Path and asset tests:
 4. Publish to IIS.
 5. Run post-deploy smoke tests on production endpoint.
 6. Record release metadata.
+
+### Fork Sync and Deployment Branch Update
+Use this flow to keep the fork close to Esri upstream while preserving deployment-only changes on storymaps-dot-com-deploy.
+
+1. Sync fork master from upstream:
+	- git switch master
+	- git fetch upstream
+	- git merge --ff-only upstream/master
+	- git push origin master
+
+2. Rebase deployment branch onto updated fork master:
+	- git switch storymaps-dot-com-deploy
+	- git rebase master
+	- Resolve conflicts if prompted, then continue rebase
+	- git push --force-with-lease origin storymaps-dot-com-deploy
+
+3. Push safety rules:
+	- Never push deployment branch to upstream.
+	- Keep origin as remote.pushDefault.
+	- Keep upstream as fetch-only in daily workflow.
 
 ### Release Metadata Template
 - Release date/time:
