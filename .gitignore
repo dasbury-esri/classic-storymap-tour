@@ -231,11 +231,6 @@ sftp-config.json
 sftp-config-alt.json
 
 ##############
-## Copilot prompts
-##############
-.github/prompts/
-
-##############
 ## VSCode settings
 ##############
 .vscode/
