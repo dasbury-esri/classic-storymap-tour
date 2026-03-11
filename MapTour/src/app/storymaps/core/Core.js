@@ -511,21 +511,61 @@ define(["esri/map",
 
 		function loadWebMappingAppStep2(appId)
 		{
+			function getUrlParam(url, paramName)
+			{
+				if( ! url || ! paramName )
+					return "";
+
+				var re = new RegExp('[?&]' + paramName + '=([^&#]*)', 'i');
+				var match = url.match(re);
+				return match && match[1] ? decodeURIComponent(match[1]) : "";
+			}
+
+			function getWebmapFromAppData(data)
+			{
+				if( ! data )
+					return "";
+
+				if( data.values && data.values.webmap )
+					return data.values.webmap;
+
+				if( data.webmap )
+					return data.webmap;
+
+				if( data.itemData && data.itemData.webmap )
+					return data.itemData.webmap;
+
+				return "";
+			}
+
 			function tryLoadWebMapFromLegacyStory(item)
 			{
-				if( ! item || ! item.url )
+				if( ! item )
 					return false;
 
-				// Some legacy story app items no longer expose /data JSON but still host a story page
-				// that embeds a webmap id. Attempt to recover by extracting the first 32-char id.
-				$.ajax({
-					url: item.url,
-					dataType: "text",
-					success: function(html){
-						var match = (html || "").match(/[a-f0-9]{32}/i);
-						if( match && match[0] ) {
-							console.log("maptour.core.Core - fallback loadWebMap from legacy story url:", match[0]);
-							loadWebMap(match[0]);
+				var directWebmapId = getUrlParam(item.url, "webmap");
+				if( directWebmapId ) {
+					console.log("maptour.core.Core - fallback loadWebMap from legacy story url param:", directWebmapId);
+					loadWebMap(directWebmapId);
+					return true;
+				}
+
+				var nestedAppId = getUrlParam(item.url, "appid");
+				if( ! nestedAppId )
+					return false;
+
+				// Use sharing API instead of cross-origin HTML fetch to avoid CORS failures.
+				esriRequest({
+					url: configOptions.sharingurl + "/" + nestedAppId + "/data",
+					content: {
+						f: "json"
+					},
+					callbackParamName: "callback",
+					load: function(response){
+						var fallbackWebmapId = getWebmapFromAppData(response);
+						if( fallbackWebmapId ) {
+							console.log("maptour.core.Core - fallback loadWebMap from nested app data:", fallbackWebmapId);
+							loadWebMap(fallbackWebmapId);
 						}
 						else
 							initError("invalidApp");
