@@ -5,6 +5,8 @@ Supports interactive auth with:
 - GIS("home")
 - profile name prompt (GIS(profile=...))
 - keyring-backed username prompt
+
+Use --auth-mode to force one path: auto|profile|home|keyring
 """
 
 from __future__ import annotations
@@ -27,6 +29,12 @@ def parse_args() -> argparse.Namespace:
         "--portal-url",
         default="https://www.arcgis.com",
         help="Portal URL for username/password login (default: https://www.arcgis.com)",
+    )
+    parser.add_argument(
+        "--auth-mode",
+        choices=["auto", "profile", "home", "keyring"],
+        default="auto",
+        help="Authentication mode (default: auto)",
     )
     parser.add_argument(
         "--profile",
@@ -153,36 +161,48 @@ def is_authenticated(gis: GIS) -> bool:
 
 
 def connect_gis(args: argparse.Namespace) -> GIS:
-    # 1) Explicit profile name provided
-    if args.profile.strip():
-        gis = GIS(profile=args.profile.strip())
-        if is_authenticated(gis):
-            return gis
-        print(
-            f"Profile '{args.profile.strip()}' did not yield an authenticated session; trying fallback auth."
-        )
+    auth_mode = (args.auth_mode or "auto").lower()
 
-    # 2) Prompt for profile name at runtime
-    if args.prompt_profile:
-        profile = input("Enter ArcGIS profile name (blank to skip): ").strip()
-        if profile:
-            gis = GIS(profile=profile)
-            if is_authenticated(gis):
-                return gis
-            print(
-                f"Profile '{profile}' did not yield an authenticated session; trying fallback auth."
+    def try_profile() -> GIS:
+        profile = args.profile.strip()
+        if not profile and args.prompt_profile:
+            profile = input("Enter ArcGIS profile name (blank to skip): ").strip()
+        if not profile:
+            raise RuntimeError("No profile provided. Use --profile or --prompt-profile.")
+        gis = GIS(profile=profile)
+        if not is_authenticated(gis):
+            raise RuntimeError(
+                f"Profile '{profile}' did not yield an authenticated session."
             )
+        return gis
 
-    # 3) Try GIS("home")
-    try:
+    def try_home() -> GIS:
         gis = GIS("home")
-        if is_authenticated(gis):
-            return gis
-        print("GIS('home') is anonymous in this environment; trying keyring/username fallback.")
-    except Exception:
-        pass
+        if not is_authenticated(gis):
+            raise RuntimeError("GIS('home') is anonymous in this environment.")
+        return gis
 
-    # 4) Keyring/username fallback
+    if auth_mode == "profile":
+        return try_profile()
+
+    if auth_mode == "home":
+        return try_home()
+
+    if auth_mode == "keyring":
+        return connect_with_keyring(args.portal_url, args.username)
+
+    # auto mode: profile -> home -> keyring
+    if args.profile.strip() or args.prompt_profile:
+        try:
+            return try_profile()
+        except Exception as ex:
+            print(f"Profile auth unavailable ({ex}); trying next auth mode.")
+
+    try:
+        return try_home()
+    except Exception as ex:
+        print(f"Home auth unavailable ({ex}); trying keyring/username fallback.")
+
     return connect_with_keyring(args.portal_url, args.username)
 
 
