@@ -145,23 +145,45 @@ def connect_with_keyring(portal_url: str, username: str = "") -> GIS:
     return GIS(portal_url, username=chosen_username, password=password)
 
 
+def is_authenticated(gis: GIS) -> bool:
+    try:
+        return gis.users.me is not None
+    except Exception:
+        return False
+
+
 def connect_gis(args: argparse.Namespace) -> GIS:
     # 1) Explicit profile name provided
     if args.profile.strip():
-        return GIS(profile=args.profile.strip())
+        gis = GIS(profile=args.profile.strip())
+        if is_authenticated(gis):
+            return gis
+        print(
+            f"Profile '{args.profile.strip()}' did not yield an authenticated session; trying fallback auth."
+        )
 
     # 2) Prompt for profile name at runtime
     if args.prompt_profile:
         profile = input("Enter ArcGIS profile name (blank to skip): ").strip()
         if profile:
-            return GIS(profile=profile)
+            gis = GIS(profile=profile)
+            if is_authenticated(gis):
+                return gis
+            print(
+                f"Profile '{profile}' did not yield an authenticated session; trying fallback auth."
+            )
 
     # 3) Try GIS("home")
     try:
-        return GIS("home")
+        gis = GIS("home")
+        if is_authenticated(gis):
+            return gis
+        print("GIS('home') is anonymous in this environment; trying keyring/username fallback.")
     except Exception:
-        # 4) Keyring/username fallback
-        return connect_with_keyring(args.portal_url, args.username)
+        pass
+
+    # 4) Keyring/username fallback
+    return connect_with_keyring(args.portal_url, args.username)
 
 
 def evaluate_item(gis: GIS, item: Any) -> Dict[str, str]:
