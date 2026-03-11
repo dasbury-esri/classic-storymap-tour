@@ -511,6 +511,33 @@ define(["esri/map",
 
 		function loadWebMappingAppStep2(appId)
 		{
+			function tryLoadWebMapFromLegacyStory(item)
+			{
+				if( ! item || ! item.url )
+					return false;
+
+				// Some legacy story app items no longer expose /data JSON but still host a story page
+				// that embeds a webmap id. Attempt to recover by extracting the first 32-char id.
+				$.ajax({
+					url: item.url,
+					dataType: "text",
+					success: function(html){
+						var match = (html || "").match(/[a-f0-9]{32}/i);
+						if( match && match[0] ) {
+							console.log("maptour.core.Core - fallback loadWebMap from legacy story url:", match[0]);
+							loadWebMap(match[0]);
+						}
+						else
+							initError("invalidApp");
+					},
+					error: function(){
+						initError("invalidApp");
+					}
+				});
+
+				return true;
+			}
+
 			// Get application item
 			var itemRq = esriRequest({
 				url: configOptions.sharingurl + "/" + appId + "",
@@ -548,6 +575,9 @@ define(["esri/map",
 				if (!dataRq.results || !dataRq.results[0] || !itemRq.results || !itemRq.results[0]) {
 					if( itemRq.results && itemRq.results[1] && itemRq.results[1] && itemRq.results[1].httpCode == 403 )
 						initError("notAuthorized");
+					else if( itemRq.results && itemRq.results[0] && tryLoadWebMapFromLegacyStory(itemRq.results[0]) ) {
+						return;
+					}
 					else
 						initError("invalidApp");
 					return;
@@ -767,6 +797,7 @@ define(["esri/map",
 			var appColors = WebApplicationData.getColors();
 			var logoURL = WebApplicationData.getLogoURL() || APPCFG.HEADER_LOGO_URL;
 			var logoTarget = (logoURL == APPCFG.HEADER_LOGO_URL) ? APPCFG.HEADER_LOGO_TARGET : WebApplicationData.getLogoTarget();
+			var viewerOnlyProd = !!(isProd() && configOptions && configOptions.viewerOnlyInProd);
 
 			app.header.init(
 				! app.isInBuilderMode && (APPCFG.EMBED || urlParams.embed || urlParams.embed === ''),
@@ -778,7 +809,8 @@ define(["esri/map",
 				! app.isInBuilderMode && (
 					(! isProd() && Helper.getAppID(isProd()))
 					|| isProd() && app.userCanEdit)
-					&& ! urlParams.preview,
+					&& ! urlParams.preview
+					&& ! viewerOnlyProd,
 				WebApplicationData.getHeaderLinkText() === undefined ? APPCFG.HEADER_LINK_TEXT : WebApplicationData.getHeaderLinkText(),
 				WebApplicationData.getHeaderLinkURL() === undefined ? APPCFG.HEADER_LINK_URL : WebApplicationData.getHeaderLinkURL(),
 				WebApplicationData.getSocial()

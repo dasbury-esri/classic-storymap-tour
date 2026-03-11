@@ -27,6 +27,11 @@ else {
 				require(["storymaps/core/Core", "storymaps/maptour/core/MainView", "storymaps/utils/Helper"], function(Core, MainView, Helper){
 					var urlParams = Helper.getUrlParams();
 					var isInBuilderMode = urlParams.edit != null || urlParams.fromScratch != null || urlParams.fromscratch != null || urlParams.fromGallery != null;
+					var isViewerOnlyProd = !!(window.isProduction && configOptions && configOptions.viewerOnlyInProd);
+
+					if (isViewerOnlyProd) {
+						isInBuilderMode = false;
+					}
 
 					if (isInBuilderMode) {
 						require(["storymaps/builder/Builder", "storymaps/maptour/builder/BuilderView"], function(Builder, BuilderView) {

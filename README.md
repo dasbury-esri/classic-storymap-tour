@@ -444,6 +444,10 @@ This will create a new `node_modules` folder in your project root with all tools
  * If using a Portal for ArcGIS instance configure the sharing url `app/maptour-config.js` (last properties)
  * If you are not using a modern browser you have to [set-up a proxy](https://developers.arcgis.com/en/javascript/jshelp/ags_proxy.html) on your development computer and configure the url in `app/maptour-config.js` (you can use a relative path)
  * Use URL parameters `webmap` and `appid` to specify the item to be loaded (all parameters from index.html are ignored in development mode)
+ * For production deployments, configure `src/index.html`:
+    * `allowAnyAppIdInProd: true` to allow public `?appid=<id>` loading outside hosted `/apps/MapTour` and `/home/MapTour` paths
+    * `allowAnyWebmapInProd: true` to allow public `?webmap=<id>` loading outside hosted `/apps/MapTour` and `/home/MapTour` paths
+    * `viewerOnlyInProd: true` to disable builder entry points (including `?edit`) and keep the app in viewer mode
 
 ### How to build application from the source code
   * Open a terminal and navigate to the MapTour folder

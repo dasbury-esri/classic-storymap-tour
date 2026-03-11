@@ -390,7 +390,9 @@ define(["storymaps/ui/crossfader/CrossFader",
 					if( ! isInBuilderMode && imgDisplayedHeight )
 						$("#placardContainer .description").css("max-height", "inherit");
 
-					if( $("#placardContainer")[0].scrollHeight > imgDisplayedHeight / 1.5 && ! _placardIsUnder ) {
+					var placardContainerNode = $("#placardContainer")[0];
+
+					if( placardContainerNode && placardContainerNode.scrollHeight > imgDisplayedHeight / 1.5 && ! _placardIsUnder ) {
 						$("#placard").addClass("one-line-layout");
 
 						if ( !isInBuilderMode && imgDisplayedHeight ) {

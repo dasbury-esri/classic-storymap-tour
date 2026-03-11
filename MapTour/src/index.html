@@ -39,10 +39,21 @@
 				// - Using a Map Tour application ID created through the interactive builder in ArcGIS.com allow to reuse
 				//   the settings like the header configuration without having to edit any configuration here
 				// - Web map and application can be dynamically specified through url parameters (webmap and appid)
-				//   if the authorizedOwners property is specified (see below)
+				//   if the authorizedOwners property is specified (see below), or if allowAnyAppIdInProd is true
 				// - If an application id is specified, the webmap configuration isn't used
 				webmap: "",
 				appid: "",
+				// Optional fallback app id used only when neither ?appid nor ?webmap is present.
+				defaultAppId: "2c62acf3468c4cbbba6b82f1035bfe22",
+				// Optional deployment profile for public IIS hosting: when true, production mode accepts any
+				// appid from the URL query string (e.g., ?appid=<id>) without owner filtering.
+				allowAnyAppIdInProd: true,
+				// Optional deployment profile for public IIS hosting: when true, production mode accepts any
+				// webmap from the URL query string (e.g., ?webmap=<id>) without owner filtering.
+				allowAnyWebmapInProd: true,
+				// Optional deployment profile for public IIS hosting: when true, builder entry points are disabled
+				// in production (including ?edit URL usage) and the app stays in viewer mode.
+				viewerOnlyInProd: true,
 				// Optional list of authorized application or web map owners
 				// Has to be specified when using appid or webmap url parameters (e.g. ["user1"], ["user1", "user2"])
 				// To authorize all users you can use ["*"]

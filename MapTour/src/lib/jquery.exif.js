@@ -230,16 +230,23 @@ var BinaryAjax = (function() {
 }());
 
 
-document.write(
-	"<script type='text/vbscript'>\r\n"
-	+ "Function IEBinary_getByteAt(strBinary, iOffset)\r\n"
-	+ "	IEBinary_getByteAt = AscB(MidB(strBinary,iOffset+1,1))\r\n"
-	+ "End Function\r\n"
-	+ "Function IEBinary_getLength(strBinary)\r\n"
-	+ "	IEBinary_getLength = LenB(strBinary)\r\n"
-	+ "End Function\r\n"
-	+ "</script>\r\n"
-);
+// Avoid document.write in asynchronously loaded bundles.
+if (window.VBArray && document && document.createElement) {
+	var vbScript = ""
+		+ "Function IEBinary_getByteAt(strBinary, iOffset)\r\n"
+		+ "	IEBinary_getByteAt = AscB(MidB(strBinary,iOffset+1,1))\r\n"
+		+ "End Function\r\n"
+		+ "Function IEBinary_getLength(strBinary)\r\n"
+		+ "	IEBinary_getLength = LenB(strBinary)\r\n"
+		+ "End Function\r\n";
+
+	var vbNode = document.createElement('script');
+	vbNode.setAttribute('type', 'text/vbscript');
+	vbNode.text = vbScript;
+
+	var head = document.getElementsByTagName('head')[0] || document.documentElement;
+	head.appendChild(vbNode);
+}
 
 
 /*var*/ EXIF = {};

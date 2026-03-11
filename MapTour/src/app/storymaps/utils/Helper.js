@@ -61,30 +61,45 @@ define(["dojo/cookie",
 			getWebmapID: function(isProd)
 			{
 				var urlParams = this.getUrlParams();
+				var allowAnyWebmap = !!(configOptions && configOptions.allowAnyWebmapInProd);
 
 				if( configOptions && configOptions.webmap )
 					return configOptions.webmap;
 
-				if ( this.isArcGISHosted() || ! isProd )
+				// IIS/public deployment profile: allow any URL webmap in production.
+				if ( isProd && allowAnyWebmap && urlParams.webmap )
+					return urlParams.webmap;
+
+				if ( (this.isArcGISHosted() || ! isProd) && urlParams.webmap )
 					return urlParams.webmap;
 
 				// Only authorize URL params outside of arcgis.com if a webmap owner is specified
-				if( configOptions.authorizedOwners && configOptions.authorizedOwners.length > 0 && configOptions.authorizedOwners[0] )
+				if( configOptions.authorizedOwners && configOptions.authorizedOwners.length > 0 && configOptions.authorizedOwners[0] && urlParams.webmap )
 					return urlParams.webmap;
 			},
 			getAppID: function(isProd)
 			{
 				var urlParams = this.getUrlParams();
+				var allowAnyAppId = !!(configOptions && configOptions.allowAnyAppIdInProd);
+				var defaultAppId = configOptions && configOptions.defaultAppId;
 
 				if( configOptions && configOptions.appid )
 					return configOptions.appid;
 
-				if ( this.isArcGISHosted() || ! isProd ) //REMOVE not prod, commented out for demo
+				// IIS/public deployment profile: allow any URL appid in production.
+				if ( isProd && allowAnyAppId && urlParams.appid )
+					return urlParams.appid;
+
+				if ( (this.isArcGISHosted() || ! isProd) && urlParams.appid ) //REMOVE not prod, commented out for demo
 					return urlParams.appid;
 
 				// Only authorize URL params outside of arcgis.com if a webmap/app owner is specified
-				if( configOptions.authorizedOwners && configOptions.authorizedOwners.length > 0 && configOptions.authorizedOwners[0] )
+				if( configOptions.authorizedOwners && configOptions.authorizedOwners.length > 0 && configOptions.authorizedOwners[0] && urlParams.appid )
 					return urlParams.appid;
+
+				// Optional fallback landing app: only used when neither appid nor webmap are supplied.
+				if( defaultAppId && ! urlParams.appid && ! urlParams.webmap )
+					return defaultAppId;
 			},
 			getSharingHost: function() {
 				var urlParams = this.getUrlParams();

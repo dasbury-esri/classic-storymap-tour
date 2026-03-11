@@ -342,8 +342,9 @@ define(["storymaps/ui/inlineFieldEdit/InlineFieldEdit",
 					$(_placardContainer).addClass("placardUnder");
 					$(_placardContainer).css("height", "auto");
 
+					var placardContainerNode = $("#placardContainer")[0];
 					var availableHeight = $(_container).height() - $(_current).height(),
-						placardFullHeight = $("#placardContainer")[0].scrollHeight;
+						placardFullHeight = placardContainerNode ? placardContainerNode.scrollHeight : 0;
 
 					var pictureTop,
 						placardHeight,
@@ -579,8 +580,14 @@ define(["storymaps/ui/inlineFieldEdit/InlineFieldEdit",
 				// Sad trick when placard is under picture layout
 				// Otherwise the textarea and container will overflow without scrollbar
 				if( _placardIsUnder ) {
-					var nameHeight = $(_placard).find(".name .text_edit_label")[0].scrollHeight;
-					var descHeight = $(_placard).find(".description .text_edit_label")[0].scrollHeight;
+					var nameNode = $(_placard).find(".name .text_edit_label")[0];
+					var descNode = $(_placard).find(".description .text_edit_label")[0];
+
+					if( ! nameNode || ! descNode )
+						return;
+
+					var nameHeight = nameNode.scrollHeight;
+					var descHeight = descNode.scrollHeight;
 
 					$(_placard).find(".name .text_edit_input").css("height", nameHeight < 96 ? "50px" : "auto");
 					$(_placard).find(".description .text_edit_input").css("height", descHeight < 96 ? "50px" : "auto");
