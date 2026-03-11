@@ -14,12 +14,9 @@ import csv
 import getpass
 import re
 import sys
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List
 
 from arcgis.gis import GIS
-
-
-APPID_RE = re.compile(r"[?&]appid=([a-f0-9]{32})", re.IGNORECASE)
 
 
 def parse_args() -> argparse.Namespace:
@@ -49,8 +46,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--max-items",
         type=int,
-        default=1000,
-        help="Maximum items returned by search (default: 1000)",
+        default=10000,
+        help="Maximum items to evaluate across all pages (default: 10000)",
+    )
+    parser.add_argument(
+        "--page-size",
+        type=int,
+        default=100,
+        help="Items requested per advanced_search page (default: 100)",
     )
     parser.add_argument(
         "--outside-org",
@@ -238,6 +241,63 @@ def evaluate_item(gis: GIS, item: Any) -> Dict[str, str]:
     }
 
 
+def get_candidate_items(
+    gis: GIS,
+    query: str,
+    max_items: int,
+    page_size: int,
+    outside_org: bool,
+) -> List[Any]:
+    items: List[Any] = []
+
+    org_query = query
+    if not outside_org:
+        org_id = str(getattr(gis.properties, "id", "") or "")
+        if org_id:
+            org_query = f"({query}) AND orgid:{org_id}"
+
+    start = 1
+    # ArcGIS REST commonly supports max page size 100; keep request bounded.
+    page_size = max(1, min(int(page_size), 100))
+
+    while True:
+        if max_items > 0 and len(items) >= max_items:
+            break
+
+        remaining = max_items - len(items) if max_items > 0 else page_size
+        request_size = min(page_size, remaining) if max_items > 0 else page_size
+
+        response = gis.content.advanced_search(
+            query=org_query,
+            start=start,
+            max_items=request_size,
+            as_dict=True,
+        )
+
+        page_results = response.get("results", []) if isinstance(response, dict) else []
+        if not page_results:
+            break
+
+        for result in page_results:
+            item_id = result.get("id") if isinstance(result, dict) else None
+            if not item_id:
+                continue
+            item_obj = gis.content.get(item_id)
+            if item_obj is not None:
+                items.append(item_obj)
+
+        next_start = -1
+        if isinstance(response, dict):
+            next_start = int(response.get("nextStart", -1) or -1)
+
+        if next_start <= 0:
+            break
+
+        start = next_start
+
+    return items
+
+
 def print_summary(rows: List[Dict[str, str]]) -> None:
     total = len(rows)
     passed = sum(1 for r in rows if r["status"] == "PASS")
@@ -293,10 +353,12 @@ def main() -> int:
     else:
         print("Logged in anonymously or user profile unavailable.")
 
-    print("Searching for candidate Classic Map Tour items...")
-    items = gis.content.search(
+    print("Searching for candidate Classic Map Tour items (paged advanced_search)...")
+    items = get_candidate_items(
+        gis=gis,
         query=args.query,
         max_items=args.max_items,
+        page_size=args.page_size,
         outside_org=args.outside_org,
     )
     print(f"Found {len(items)} items")
