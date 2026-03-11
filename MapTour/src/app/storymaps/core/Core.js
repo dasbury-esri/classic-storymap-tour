@@ -526,6 +526,9 @@ define(["esri/map",
 				if( ! data )
 					return "";
 
+				if( data.values && data.values.webmap && data.values.webmap.id )
+					return data.values.webmap.id;
+
 				if( data.values && data.values.webmap )
 					return data.values.webmap;
 
@@ -536,6 +539,17 @@ define(["esri/map",
 					return data.itemData.webmap;
 
 				return "";
+			}
+
+			function isMapTourItem(item)
+			{
+				var keywords = item && item.typeKeywords ? item.typeKeywords : [];
+				var keywordCsv = (keywords || []).join(',').toLowerCase();
+				var itemUrl = item && item.url ? item.url.toLowerCase() : "";
+
+				return keywordCsv.indexOf('maptour') >= 0
+					|| keywordCsv.indexOf('map tour') >= 0
+					|| itemUrl.indexOf('/apps/maptour/') >= 0;
 			}
 
 			function tryLoadWebMapFromLegacyStory(item)
@@ -556,19 +570,36 @@ define(["esri/map",
 
 				// Use sharing API instead of cross-origin HTML fetch to avoid CORS failures.
 				esriRequest({
-					url: configOptions.sharingurl + "/" + nestedAppId + "/data",
+					url: configOptions.sharingurl + "/" + nestedAppId,
 					content: {
 						f: "json"
 					},
 					callbackParamName: "callback",
-					load: function(response){
-						var fallbackWebmapId = getWebmapFromAppData(response);
-						if( fallbackWebmapId ) {
-							console.log("maptour.core.Core - fallback loadWebMap from nested app data:", fallbackWebmapId);
-							loadWebMap(fallbackWebmapId);
-						}
-						else
+					load: function(nestedItem){
+						if( ! isMapTourItem(nestedItem) ) {
 							initError("invalidApp");
+							return;
+						}
+
+						esriRequest({
+							url: configOptions.sharingurl + "/" + nestedAppId + "/data",
+							content: {
+								f: "json"
+							},
+							callbackParamName: "callback",
+							load: function(response){
+								var fallbackWebmapId = getWebmapFromAppData(response);
+								if( fallbackWebmapId ) {
+									console.log("maptour.core.Core - fallback loadWebMap from nested app data:", fallbackWebmapId);
+									loadWebMap(fallbackWebmapId);
+								}
+								else
+									initError("invalidApp");
+							},
+							error: function(){
+								initError("invalidApp");
+							}
+						});
 					},
 					error: function(){
 						initError("invalidApp");
