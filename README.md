@@ -484,6 +484,8 @@ Run with automatic auth fallback (profile -> home -> keyring):
 
 `python misc/maptour_compatibility_audit.py --auth-mode auto --prompt-profile --username <your_username> --max-items 30000 --page-size 100 --csv maptour_audit.csv`
 
+When `--csv` is a relative file name (for example `maptour_audit.csv`), output is written to the `misc/` folder.
+
 #### 3) Progress / heartbeat output
 
 The script prints search page progress and evaluation progress while running.

@@ -14,6 +14,7 @@ from __future__ import annotations
 import argparse
 import csv
 import getpass
+import os
 import re
 import sys
 from typing import Any, Dict, List
@@ -76,7 +77,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--csv",
         default="",
-        help="Optional output CSV path",
+        help="Optional output CSV path (relative paths are written under misc/)",
     )
     parser.add_argument(
         "--heartbeat-every",
@@ -373,6 +374,11 @@ def write_csv(path: str, rows: List[Dict[str, str]]) -> None:
     if not path:
         return
 
+    output_path = path
+    if not os.path.isabs(output_path):
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        output_path = os.path.join(script_dir, output_path)
+
     fieldnames = [
         "id",
         "title",
@@ -385,12 +391,12 @@ def write_csv(path: str, rows: List[Dict[str, str]]) -> None:
         "url",
     ]
 
-    with open(path, "w", newline="", encoding="utf-8") as f:
+    with open(output_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(rows)
 
-    print(f"\nCSV written: {path}")
+    print(f"\nCSV written: {output_path}")
 
 
 def main() -> int:
