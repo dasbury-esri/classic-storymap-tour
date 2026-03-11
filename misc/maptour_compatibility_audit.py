@@ -78,6 +78,12 @@ def parse_args() -> argparse.Namespace:
         default="",
         help="Optional output CSV path",
     )
+    parser.add_argument(
+        "--heartbeat-every",
+        type=int,
+        default=250,
+        help="Print progress every N items (0 disables item-level heartbeat, default: 250)",
+    )
     return parser.parse_args()
 
 
@@ -289,6 +295,7 @@ def get_candidate_items(
     max_items: int,
     page_size: int,
     outside_org: bool,
+    heartbeat_every: int,
 ) -> List[Any]:
     items: List[Any] = []
 
@@ -301,6 +308,7 @@ def get_candidate_items(
     start = 1
     # ArcGIS REST commonly supports max page size 100; keep request bounded.
     page_size = max(1, min(int(page_size), 100))
+    page_no = 0
 
     while True:
         if max_items > 0 and len(items) >= max_items:
@@ -315,6 +323,7 @@ def get_candidate_items(
             max_items=request_size,
             as_dict=True,
         )
+        page_no += 1
 
         page_results = response.get("results", []) if isinstance(response, dict) else []
         if not page_results:
@@ -331,6 +340,12 @@ def get_candidate_items(
         next_start = -1
         if isinstance(response, dict):
             next_start = int(response.get("nextStart", -1) or -1)
+
+        if heartbeat_every >= 0:
+            print(
+                f"[progress] search page={page_no} fetched={len(page_results)} total_items={len(items)} nextStart={next_start}",
+                flush=True,
+            )
 
         if next_start <= 0:
             break
@@ -402,12 +417,16 @@ def main() -> int:
         max_items=args.max_items,
         page_size=args.page_size,
         outside_org=args.outside_org,
+        heartbeat_every=args.heartbeat_every,
     )
     print(f"Found {len(items)} items")
 
     rows: List[Dict[str, str]] = []
-    for item in items:
+    heartbeat_every = max(0, int(args.heartbeat_every))
+    for idx, item in enumerate(items, start=1):
         rows.append(evaluate_item(gis, item))
+        if heartbeat_every > 0 and (idx % heartbeat_every == 0 or idx == len(items)):
+            print(f"[progress] evaluated {idx}/{len(items)} items", flush=True)
 
     print_summary(rows)
     write_csv(args.csv, rows)

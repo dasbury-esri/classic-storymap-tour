@@ -456,6 +456,46 @@ This will create a new `node_modules` folder in your project root with all tools
 The deploy folder now contains the built application that you can deploy to your web server.
 For IIS deployment and release operations, see [misc/IIS-DEPLOYMENT-RUNBOOK.md](misc/IIS-DEPLOYMENT-RUNBOOK.md).
 
+### Map Tour Compatibility Audit Workflow
+
+Use `misc/maptour_compatibility_audit.py` to scan ArcGIS Online items and check whether they are compatible with this Classic Map Tour viewer deployment.
+
+#### 1) Verify keyring credentials (optional)
+
+Check whether a password exists in keyring for the `system` service:
+
+`python -c "import keyring; u=input('Username: ').strip(); p=keyring.get_password('system', u); print('PASSWORD FOUND' if p else 'NO PASSWORD')"`
+
+Check whether a credential entry exists:
+
+`python -c "import keyring; u=input('Username: ').strip(); c=keyring.get_credential('system', u); print('FOUND' if c else 'NOT FOUND')"`
+
+#### 2) Run the audit
+
+Run with explicit keyring auth (recommended when you have username/password in keyring):
+
+`python misc/maptour_compatibility_audit.py --auth-mode keyring --username <your_username> --max-items 30000 --page-size 100 --csv maptour_audit.csv`
+
+Run with profile auth only:
+
+`python misc/maptour_compatibility_audit.py --auth-mode profile --profile <profile_name> --max-items 30000 --page-size 100 --csv maptour_audit.csv`
+
+Run with automatic auth fallback (profile -> home -> keyring):
+
+`python misc/maptour_compatibility_audit.py --auth-mode auto --prompt-profile --username <your_username> --max-items 30000 --page-size 100 --csv maptour_audit.csv`
+
+#### 3) Progress / heartbeat output
+
+The script prints search page progress and evaluation progress while running.
+
+Control heartbeat frequency with:
+
+`--heartbeat-every <N>` where `N` is number of evaluated items between updates (default `250`).
+
+Disable item-level heartbeat (search page heartbeat still prints):
+
+`--heartbeat-every 0`
+
 ### Issues building the application
 
 The build script perform code validation through [JSHint](http://www.jshint.com/), you can disable that by editing Gruntfile.js and look for the following comments `/* Comment out to disable code linting */`.
