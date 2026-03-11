@@ -454,6 +454,7 @@ This will create a new `node_modules` folder in your project root with all tools
    * Run the following command: `npx grunt-cli`
 
 The deploy folder now contains the built application that you can deploy to your web server.
+For IIS deployment and release operations, see [misc/IIS-DEPLOYMENT-RUNBOOK.md](misc/IIS-DEPLOYMENT-RUNBOOK.md).
 
 ### Issues building the application
 

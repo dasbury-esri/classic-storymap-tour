@@ -108,7 +108,7 @@
 					files: [{
 						expand: true,
 						cwd: 'src',
-								src:['*.html'],
+						src:['*.html', 'web.config'],
 						dest: 'deploy/'
 					}]
 				},
