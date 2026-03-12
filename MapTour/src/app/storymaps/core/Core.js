@@ -521,6 +521,18 @@ define(["esri/map",
 				return match && match[1] ? decodeURIComponent(match[1]) : "";
 			}
 
+			function isSameOriginUrl(url)
+			{
+				if( ! url )
+					return false;
+
+				var parser = document.createElement('a');
+				parser.href = url;
+
+				return parser.protocol == document.location.protocol
+					&& parser.host == document.location.host;
+			}
+
 			function getWebmapFromAppData(data)
 			{
 				if( ! data )
@@ -566,7 +578,31 @@ define(["esri/map",
 
 				var nestedAppId = getUrlParam(item.url, "appid");
 				if( ! nestedAppId )
+				{
+					// Keep legacy behavior for same-origin story pages where /data is empty.
+					if( item.url && isSameOriginUrl(item.url) ) {
+						$.ajax({
+							url: item.url,
+							dataType: "text",
+							success: function(html){
+								var match = (html || "").match(/[a-f0-9]{32}/i);
+								if( match && match[0] ) {
+									console.log("maptour.core.Core - fallback loadWebMap from same-origin legacy story:", match[0]);
+									loadWebMap(match[0]);
+								}
+								else
+									initError("invalidApp");
+							},
+							error: function(){
+								initError("invalidApp");
+							}
+						});
+
+						return true;
+					}
+
 					return false;
+				}
 
 				// Use sharing API instead of cross-origin HTML fetch to avoid CORS failures.
 				esriRequest({
@@ -646,6 +682,8 @@ define(["esri/map",
 				if (!dataRq.results || !dataRq.results[0] || !itemRq.results || !itemRq.results[0]) {
 					if( itemRq.results && itemRq.results[1] && itemRq.results[1] && itemRq.results[1].httpCode == 403 )
 						initError("notAuthorized");
+					else if( itemRq.results && itemRq.results[0] && itemRq.results[0].type == "Web Map" )
+						loadWebMap(itemRq.results[0].id || appId);
 					else if( itemRq.results && itemRq.results[0] && tryLoadWebMapFromLegacyStory(itemRq.results[0]) ) {
 						return;
 					}
