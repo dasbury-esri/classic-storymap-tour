@@ -1,0 +1,72 @@
+{
+    "id": "75d536a69270440a952ae2e5c0143242",
+    "owner": "acarroll73",
+    "orgId": "nzS0F0zdNLvs7nc8",
+    "created": 1330366080000,
+    "isOrgItem": true,
+    "modified": 1346084246000,
+    "guid": null,
+    "name": null,
+    "title": "Human activities are reshaping Earth's surface",
+    "type": "Web Map",
+    "typeKeywords": [
+        "Web Map",
+        "Explorer Web Map",
+        "Map",
+        "Online Map",
+        "ArcGIS Online"
+    ],
+    "description": "<p><font face='Arial'>The seven billion human passengers on Spaceship Earth are increasingly altering its surface—through direct activities such as farming, mining, and building, and indirectly by altering its climate.</font><font face='Calibri, sans-serif'></font></p><p><font face='Arial'>This web map was created to feature in a </font><a href='http://storymaps.esri.com/changeseries/' target='_self'>story map</a><font face='Arial'> published by Esri in February 2012. More story maps can be found in </font><a href='http://storymaps.esri.com/wordpress/' target='_self'>this gallery</a><font face='Arial'>.</font></p>",
+    "tags": [
+        "Landsat",
+        "imagery",
+        "satellite",
+        "change"
+    ],
+    "snippet": "The seven billion human passengers on Spaceship Earth are increasingly transforming its surface—through farming, mining, building, and by altering its climate.",
+    "thumbnail": "thumbnail/ago_downloaded.png",
+    "documentation": null,
+    "extent": [
+        [
+            -148.2042,
+            60.7249
+        ],
+        [
+            -145.8339,
+            61.5835
+        ]
+    ],
+    "categories": [],
+    "spatialReference": null,
+    "accessInformation": "",
+    "classification": null,
+    "licenseInfo": "",
+    "culture": "en-us",
+    "properties": null,
+    "advancedSettings": null,
+    "url": "",
+    "proxyFilter": null,
+    "access": "public",
+    "size": 31774,
+    "subInfo": 0,
+    "appCategories": [],
+    "industries": [],
+    "languages": [],
+    "largeThumbnail": null,
+    "banner": null,
+    "screenshots": [],
+    "listed": false,
+    "ownerFolder": "b08144af3fd24290b0279af0f5cf4d51",
+    "protected": false,
+    "commentsEnabled": true,
+    "numComments": 0,
+    "numRatings": 0,
+    "avgRating": 0,
+    "numViews": 66350,
+    "itemControl": "admin",
+    "scoreCompleteness": 80,
+    "groupDesignations": null,
+    "apiToken1ExpirationDate": -1,
+    "apiToken2ExpirationDate": -1,
+    "lastViewed": 1773284400000
+}

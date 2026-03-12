@@ -498,6 +498,85 @@ Disable item-level heartbeat (search page heartbeat still prints):
 
 `--heartbeat-every 0`
 
+### Web Map Version Audit Workflow (< 2.0)
+
+Use `misc/webmap_version_audit.py` to scan your ArcGIS Online org for Web Maps with legacy map JSON versions below `2.0`.
+
+#### Prerequisites (avoid import/runtime errors)
+
+The script requires the ArcGIS API for Python package (`arcgis`) in the same Python environment you run it with.
+
+Create and activate an environment (example with micromamba):
+
+`micromamba create -n arcgis-full-2.4.2 -c esri -c conda-forge python=3.11 arcgis keyring -y`
+
+`micromamba activate arcgis-full-2.4.2`
+
+If your environment already exists, install missing packages:
+
+`micromamba install -n arcgis-full-2.4.2 -c esri -c conda-forge arcgis keyring -y`
+
+Verify the runtime package is available:
+
+`python -c "import arcgis, keyring; print('ok', arcgis.__version__)"`
+
+If VS Code/Pylance still shows `Import "arcgis.gis" could not be resolved`, select the same interpreter used to run the script:
+
+1. Open Command Palette
+2. Run `Python: Select Interpreter`
+3. Choose your ArcGIS environment interpreter (for example `.../micromamba/envs/arcgis-full-2.4.2/python.exe`)
+
+Run with explicit keyring auth:
+
+`python misc/webmap_version_audit.py --auth-mode keyring --username <your_username> --min-version 2.0 --max-items 50000 --page-size 100 --csv legacy_webmaps_lt_2_0.csv`
+
+If you are currently in the `MapTour/` folder, use:
+
+`python ../misc/webmap_version_audit.py --auth-mode keyring --username <your_username> --min-version 2.0 --max-items 50000 --page-size 100 --csv legacy_webmaps_lt_2_0.csv`
+
+Run with profile auth:
+
+`python misc/webmap_version_audit.py --auth-mode profile --profile <profile_name> --min-version 2.0 --max-items 50000 --page-size 100 --csv legacy_webmaps_lt_2_0.csv`
+
+Run with automatic fallback (profile -> home -> keyring):
+
+`python misc/webmap_version_audit.py --auth-mode auto --prompt-profile --username <your_username> --min-version 2.0 --max-items 50000 --page-size 100 --csv legacy_webmaps_lt_2_0.csv`
+
+Notes:
+ * Relative `--csv` output paths are written under `misc/`.
+ * Output CSV only includes actionable rows: `LEGACY` (`version < 2.0`) and `UNKNOWN` (missing/unparseable version).
+ * Search progress and evaluation heartbeat are printed during execution.
+ * Progress wording is intentionally split into:
+    * page fetch status: `[progress] webmap search page=<n> fetched=<n> items`
+    * evaluation status: `[progress] evaluated <n>/<total> items`
+    * running legacy count: `[progress] found <x> webmaps with version < 2.0`
+
+#### Impact mode (legacy map references by apps)
+
+Use impact mode to identify whether each `LEGACY` web map is referenced by any Web Mapping Application (including Map Tour apps), so migration can be prioritized by downstream impact.
+
+Run impact mode:
+
+`python misc/webmap_version_audit.py --mode impact --auth-mode keyring --username <your_username> --min-version 2.0 --max-items 50000 --max-app-items 50000 --page-size 100 --csv legacy_webmaps_impact.csv`
+
+If you are currently in the `MapTour/` folder, use:
+
+`python ../misc/webmap_version_audit.py --mode impact --auth-mode keyring --username <your_username> --min-version 2.0 --max-items 50000 --max-app-items 50000 --page-size 100 --csv legacy_webmaps_impact.csv`
+
+Impact mode adds these CSV fields:
+ * `ref_app_count`: number of referencing Web Mapping Applications
+ * `ref_public_app_count`: number of public referencing applications
+ * `ref_maptour_count`: number of referencing Map Tour applications
+ * `ref_public_maptour_count`: number of public referencing Map Tour applications
+ * `ref_app_ids`: semicolon-delimited referencing app IDs (truncated by `--max-ref-ids`)
+ * `ref_maptour_ids`: semicolon-delimited Map Tour app IDs (truncated by `--max-ref-ids`)
+ * `migration_priority`: `HIGH`, `MEDIUM`, or `LOW`
+
+Tune impact mode output:
+ * `--app-query` to narrow which applications are considered
+ * `--max-app-items` to cap scanned applications
+ * `--max-ref-ids` to control how many app IDs are written per row
+
 ### Issues building the application
 
 The build script perform code validation through [JSHint](http://www.jshint.com/), you can disable that by editing Gruntfile.js and look for the following comments `/* Comment out to disable code linting */`.

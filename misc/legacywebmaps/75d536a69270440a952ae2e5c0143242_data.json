@@ -1,0 +1,1241 @@
+{
+    "operationalLayers": [
+        {
+            "url": "http://imagery.arcgisonline.com/arcgis/rest/services/LandsatGLS/NaturalWithAtmosphereRemoval/ImageServer",
+            "id": "NaturalWithAtmosphereRemoval_141",
+            "visibility": true,
+            "opacity": 1,
+            "title": "NaturalWithAtmosphereRemoval"
+        },
+        {
+            "id": "csv_8415",
+            "title": "ChangingSurface",
+            "featureCollection": {
+                "showLegend": true,
+                "layers": [
+                    {
+                        "layerDefinition": {
+                            "geometryType": "esriGeometryPoint",
+                            "objectIdField": "__OBJECTID",
+                            "type": "Feature Layer",
+                            "typeIdField": "",
+                            "drawingInfo": {
+                                "renderer": {
+                                    "type": "simple",
+                                    "symbol": {
+                                        "angle": 0,
+                                        "xoffset": 0,
+                                        "yoffset": 7.5,
+                                        "type": "esriPMS",
+                                        "url": "http://static.arcgis.com/images/Symbols/Shapes/RedPin1LargeB.png",
+                                        "imageData": "iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAADImlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjAgNjEuMTM0Nzc3LCAyMDEwLzAyLzEyLTE3OjMyOjAwICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo1MzA4NzI3NkQyN0MxMUUwQUU5NUVFMEYwMTY0NzUwNSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo1MzA4NzI3N0QyN0MxMUUwQUU5NUVFMEYwMTY0NzUwNSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjUzMDg3Mjc0RDI3QzExRTBBRTk1RUUwRjAxNjQ3NTA1IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjUzMDg3Mjc1RDI3QzExRTBBRTk1RUUwRjAxNjQ3NTA1Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQg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",
+                                        "contentType": "image/png",
+                                        "width": 18,
+                                        "height": 18
+                                    }
+                                },
+                                "fixedSymbols": true
+                            },
+                            "fields": [
+                                {
+                                    "name": "__OBJECTID",
+                                    "alias": "__OBJECTID",
+                                    "type": "esriFieldTypeOID",
+                                    "editable": false,
+                                    "domain": null
+                                },
+                                {
+                                    "name": "Order",
+                                    "alias": "Order",
+                                    "type": "esriFieldTypeInteger",
+                                    "editable": true,
+                                    "domain": null
+                                },
+                                {
+                                    "name": "Location",
+                                    "alias": "Location",
+                                    "type": "esriFieldTypeString",
+                                    "editable": true,
+                                    "domain": null
+                                },
+                                {
+                                    "name": "Phenomenon",
+                                    "alias": "Phenomenon",
+                                    "type": "esriFieldTypeString",
+                                    "editable": true,
+                                    "domain": null
+                                },
+                                {
+                                    "name": "Long",
+                                    "alias": "Long",
+                                    "type": "esriFieldTypeDouble",
+                                    "editable": true,
+                                    "domain": null
+                                },
+                                {
+                                    "name": "Lat",
+                                    "alias": "Lat",
+                                    "type": "esriFieldTypeDouble",
+                                    "editable": true,
+                                    "domain": null
+                                }
+                            ],
+                            "types": [],
+                            "capabilities": "Query",
+                            "name": "ChangingSurface"
+                        },
+                        "featureSet": {
+                            "features": [
+                                {
+                                    "geometry": {
+                                        "x": 6510812.521388337,
+                                        "y": 5610787.086118284,
+                                        "spatialReference": {
+                                            "wkid": 102100
+                                        }
+                                    },
+                                    "attributes": {
+                                        "Order": 1,
+                                        "Location": "Aral Sea, Uzbekistan and Kazakhstan",
+                                        "Phenomenon": "Shrinkage due to water use",
+                                        "Long": 58.487624,
+                                        "Lat": 44.931774,
+                                        "__OBJECTID": 0
+                                    }
+                                },
+                                {
+                                    "geometry": {
+                                        "x": 6855964.725164868,
+                                        "y": 3667096.1738043837,
+                                        "spatialReference": {
+                                            "wkid": 102100
+                                        }
+                                    },
+                                    "attributes": {
+                                        "Order": 2,
+                                        "Location": "Lake Hamoun, Iran",
+                                        "Phenomenon": "Shrinkage due to water use",
+                                        "Long": 61.588179,
+                                        "Lat": 31.264107,
+                                        "__OBJECTID": 1
+                                    }
+                                },
+                                {
+                                    "geometry": {
+                                        "x": 4158682.8878922705,
+                                        "y": -341352.2916424876,
+                                        "spatialReference": {
+                                            "wkid": 102100
+                                        }
+                                    },
+                                    "attributes": {
+                                        "Order": 3,
+                                        "Location": "Kilimanjaro, Tanzania",
+                                        "Phenomenon": "Shrinking snow and ice fields",
+                                        "Long": 37.358084,
+                                        "Lat": -3.064957,
+                                        "__OBJECTID": 2
+                                    }
+                                },
+                                {
+                                    "geometry": {
+                                        "x": -16370888.439701844,
+                                        "y": 8644598.853477387,
+                                        "spatialReference": {
+                                            "wkid": 102100
+                                        }
+                                    },
+                                    "attributes": {
+                                        "Order": 4,
+                                        "Location": "Columbia Glacier, Alaska",
+                                        "Phenomenon": "Glacial retreat",
+                                        "Long": -147.062193,
+                                        "Lat": 61.081665,
+                                        "__OBJECTID": 3
+                                    }
+                                },
+                                {
+                                    "geometry": {
+                                        "x": -9713034.44820264,
+                                        "y": 1464614.3804937585,
+                                        "spatialReference": {
+                                            "wkid": 102100
+                                        }
+                                    },
+                                    "attributes": {
+                                        "Order": 5,
+                                        "Location": "Gulf of Fonseca, Honduras",
+                                        "Phenomenon": "Shrimp farming",
+                                        "Long": -87.253673,
+                                        "Lat": 13.042729,
+                                        "__OBJECTID": 4
+                                    }
+                                },
+                                {
+                                    "geometry": {
+                                        "x": 12630327.570481604,
+                                        "y": 413392.8667299505,
+                                        "spatialReference": {
+                                            "wkid": 102100
+                                        }
+                                    },
+                                    "attributes": {
+                                        "Order": 6,
+                                        "Location": "Coastal Malaysia",
+                                        "Phenomenon": "Oil palm plantations",
+                                        "Long": 113.460163,
+                                        "Lat": 3.710974,
+                                        "__OBJECTID": 5
+                                    }
+                                },
+                                {
+                                    "geometry": {
+                                        "x": -6939275.452838117,
+                                        "y": -1969900.784559251,
+                                        "spatialReference": {
+                                            "wkid": 102100
+                                        }
+                                    },
+                                    "attributes": {
+                                        "Order": 7,
+                                        "Location": "Santa Cruz, Bolivia",
+                                        "Phenomenon": "Agriculture and deforestation",
+                                        "Long": -62.336572,
+                                        "Lat": -17.421114,
+                                        "__OBJECTID": 6
+                                    }
+                                },
+                                {
+                                    "geometry": {
+                                        "x": 14488084.673696972,
+                                        "y": 3878015.33224326,
+                                        "spatialReference": {
+                                            "wkid": 102100
+                                        }
+                                    },
+                                    "attributes": {
+                                        "Order": 8,
+                                        "Location": "Isahaya Bay, Japan",
+                                        "Phenomenon": "Reclamation for agriculture",
+                                        "Long": 130.148679,
+                                        "Lat": 32.869653,
+                                        "__OBJECTID": 7
+                                    }
+                                },
+                                {
+                                    "geometry": {
+                                        "x": -12422317.194499696,
+                                        "y": 7779052.105831585,
+                                        "spatialReference": {
+                                            "wkid": 102100
+                                        }
+                                    },
+                                    "attributes": {
+                                        "Order": 9,
+                                        "Location": "Athabaska oil sands, Alberta, Canada",
+                                        "Phenomenon": "Oil development",
+                                        "Long": -111.591574,
+                                        "Lat": 57.092518,
+                                        "__OBJECTID": 8
+                                    }
+                                },
+                                {
+                                    "geometry": {
+                                        "x": -9067485.819284027,
+                                        "y": 4580517.577613442,
+                                        "spatialReference": {
+                                            "wkid": 102100
+                                        }
+                                    },
+                                    "attributes": {
+                                        "Order": 10,
+                                        "Location": "West Virginia",
+                                        "Phenomenon": "Mountaintop removal",
+                                        "Long": -81.454611,
+                                        "Lat": 38.007728,
+                                        "__OBJECTID": 9
+                                    }
+                                },
+                                {
+                                    "geometry": {
+                                        "x": 3466442.745713801,
+                                        "y": 3500848.5900845616,
+                                        "spatialReference": {
+                                            "wkid": 102100
+                                        }
+                                    },
+                                    "attributes": {
+                                        "Order": 11,
+                                        "Location": "Pyramids, Giza, Egypt",
+                                        "Phenomenon": "Urbanization and development",
+                                        "Long": 31.139585,
+                                        "Lat": 29.978983,
+                                        "__OBJECTID": 10
+                                    }
+                                },
+                                {
+                                    "geometry": {
+                                        "x": 12666237.011821698,
+                                        "y": 2636836.4764228696,
+                                        "spatialReference": {
+                                            "wkid": 102100
+                                        }
+                                    },
+                                    "attributes": {
+                                        "Order": 12,
+                                        "Location": "Dongguan, China",
+                                        "Phenomenon": "Rapid urbanization and industrialization",
+                                        "Long": 113.782743,
+                                        "Lat": 23.039833,
+                                        "__OBJECTID": 11
+                                    }
+                                },
+                                {
+                                    "geometry": {
+                                        "x": -12948575.634445256,
+                                        "y": 3996511.3057507575,
+                                        "spatialReference": {
+                                            "wkid": 102100
+                                        }
+                                    },
+                                    "attributes": {
+                                        "Order": 13,
+                                        "Location": "Palm Springs, California",
+                                        "Phenomenon": "Housing and golf course development",
+                                        "Long": -116.319034,
+                                        "Lat": 33.759179,
+                                        "__OBJECTID": 12
+                                    }
+                                },
+                                {
+                                    "geometry": {
+                                        "x": -8625497.903661335,
+                                        "y": 4727144.156260886,
+                                        "spatialReference": {
+                                            "wkid": 102100
+                                        }
+                                    },
+                                    "attributes": {
+                                        "Order": 14,
+                                        "Location": "Loudoun County, Virginia",
+                                        "Phenomenon": "Suburban sprawl",
+                                        "Long": -77.484166,
+                                        "Lat": 39.038195,
+                                        "__OBJECTID": 13
+                                    }
+                                }
+                            ],
+                            "geometryType": "esriGeometryPoint"
+                        },
+                        "nextObjectId": 14,
+                        "popupInfo": {
+                            "title": "{Order}. {Location}",
+                            "fieldInfos": [
+                                {
+                                    "fieldName": "__OBJECTID",
+                                    "label": "__OBJECTID",
+                                    "isEditable": true,
+                                    "tooltip": "",
+                                    "visible": false,
+                                    "stringFieldOption": "textbox"
+                                },
+                                {
+                                    "fieldName": "Order",
+                                    "label": "Order",
+                                    "isEditable": true,
+                                    "tooltip": "",
+                                    "visible": false,
+                                    "format": {
+                                        "places": 0,
+                                        "digitSeparator": true
+                                    },
+                                    "stringFieldOption": "textbox"
+                                },
+                                {
+                                    "fieldName": "Location",
+                                    "label": "Location",
+                                    "isEditable": true,
+                                    "tooltip": "",
+                                    "visible": false,
+                                    "stringFieldOption": "textbox"
+                                },
+                                {
+                                    "fieldName": "Phenomenon",
+                                    "label": "Phenomenon",
+                                    "isEditable": true,
+                                    "tooltip": "",
+                                    "visible": true,
+                                    "stringFieldOption": "textbox"
+                                },
+                                {
+                                    "fieldName": "Long",
+                                    "label": "Long",
+                                    "isEditable": true,
+                                    "tooltip": "",
+                                    "visible": false,
+                                    "format": {
+                                        "places": 2,
+                                        "digitSeparator": true
+                                    },
+                                    "stringFieldOption": "textbox"
+                                },
+                                {
+                                    "fieldName": "Lat",
+                                    "label": "Lat",
+                                    "isEditable": true,
+                                    "tooltip": "",
+                                    "visible": false,
+                                    "format": {
+                                        "places": 2,
+                                        "digitSeparator": true
+                                    },
+                                    "stringFieldOption": "textbox"
+                                }
+                            ],
+                            "description": null,
+                            "showAttachments": false,
+                            "mediaInfos": []
+                        }
+                    }
+                ]
+            },
+            "visibility": false,
+            "opacity": 1
+        },
+        {
+            "id": "mapNotes_910",
+            "title": "Map Notes",
+            "featureCollection": {
+                "layers": [
+                    {
+                        "layerDefinition": {
+                            "objectIdField": "OBJECTID",
+                            "templates": [],
+                            "type": "Feature Layer",
+                            "drawingInfo": {
+                                "renderer": {
+                                    "field1": "TYPEID",
+                                    "type": "uniqueValue",
+                                    "uniqueValueInfos": [
+                                        {
+                                            "symbol": {
+                                                "style": "esriSFSSolid",
+                                                "color": [
+                                                    155,
+                                                    187,
+                                                    89,
+                                                    128
+                                                ],
+                                                "outline": {
+                                                    "style": "esriSLSSolid",
+                                                    "color": [
+                                                        115,
+                                                        140,
+                                                        61,
+                                                        255
+                                                    ],
+                                                    "width": 1.5,
+                                                    "type": "esriSLS"
+                                                },
+                                                "type": "esriSFS"
+                                            },
+                                            "description": "",
+                                            "value": "0",
+                                            "label": "Area"
+                                        }
+                                    ]
+                                }
+                            },
+                            "displayField": "TITLE",
+                            "visibilityField": "VISIBLE",
+                            "name": "Areas",
+                            "hasAttachments": false,
+                            "typeIdField": "TYPEID",
+                            "capabilities": "Query,Editing",
+                            "types": [
+                                {
+                                    "id": 0,
+                                    "templates": [
+                                        {
+                                            "drawingTool": "esriFeatureEditToolPolygon",
+                                            "description": "",
+                                            "name": "Area",
+                                            "prototype": {
+                                                "attributes": {
+                                                    "VISIBLE": 1,
+                                                    "TITLE": "Area",
+                                                    "TYPEID": 0
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "drawingTool": "esriFeatureEditToolTriangle",
+                                            "description": "",
+                                            "name": "Triangle",
+                                            "prototype": {
+                                                "attributes": {
+                                                    "VISIBLE": 1,
+                                                    "TITLE": "Area",
+                                                    "TYPEID": 0
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "drawingTool": "esriFeatureEditToolRectangle",
+                                            "description": "",
+                                            "name": "Rectangle",
+                                            "prototype": {
+                                                "attributes": {
+                                                    "VISIBLE": 1,
+                                                    "TITLE": "Area",
+                                                    "TYPEID": 0
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "drawingTool": "esriFeatureEditToolLeftArrow",
+                                            "description": "",
+                                            "name": "Left Arrow",
+                                            "prototype": {
+                                                "attributes": {
+                                                    "VISIBLE": 1,
+                                                    "TITLE": "Area",
+                                                    "TYPEID": 0
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "drawingTool": "esriFeatureEditToolRightArrow",
+                                            "description": "",
+                                            "name": "Right Arrow",
+                                            "prototype": {
+                                                "attributes": {
+                                                    "VISIBLE": 1,
+                                                    "TITLE": "Area",
+                                                    "TYPEID": 0
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "drawingTool": "esriFeatureEditToolEllipse",
+                                            "description": "",
+                                            "name": "Ellipse",
+                                            "prototype": {
+                                                "attributes": {
+                                                    "VISIBLE": 1,
+                                                    "TITLE": "Area",
+                                                    "TYPEID": 0
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "drawingTool": "esriFeatureEditToolUpArrow",
+                                            "description": "",
+                                            "name": "Up Arrow",
+                                            "prototype": {
+                                                "attributes": {
+                                                    "VISIBLE": 1,
+                                                    "TITLE": "Area",
+                                                    "TYPEID": 0
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "drawingTool": "esriFeatureEditToolDownArrow",
+                                            "description": "",
+                                            "name": "Down Arrow",
+                                            "prototype": {
+                                                "attributes": {
+                                                    "VISIBLE": 1,
+                                                    "TITLE": "Area",
+                                                    "TYPEID": 0
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "drawingTool": "esriFeatureEditToolCircle",
+                                            "description": "",
+                                            "name": "Circle",
+                                            "prototype": {
+                                                "attributes": {
+                                                    "VISIBLE": 1,
+                                                    "TITLE": "Area",
+                                                    "TYPEID": 0
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "drawingTool": "esriFeatureEditToolFreehand",
+                                            "description": "",
+                                            "name": "Freehand Area",
+                                            "prototype": {
+                                                "attributes": {
+                                                    "VISIBLE": 1,
+                                                    "TITLE": "Area",
+                                                    "TYPEID": 0
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "domains": {},
+                                    "name": "Area"
+                                }
+                            ],
+                            "geometryType": "esriGeometryPolygon",
+                            "fields": [
+                                {
+                                    "alias": "OBJECTID",
+                                    "name": "OBJECTID",
+                                    "type": "esriFieldTypeOID",
+                                    "editable": false
+                                },
+                                {
+                                    "alias": "Title",
+                                    "name": "TITLE",
+                                    "length": 50,
+                                    "type": "esriFieldTypeString",
+                                    "editable": true
+                                },
+                                {
+                                    "alias": "Visible",
+                                    "name": "VISIBLE",
+                                    "type": "esriFieldTypeInteger",
+                                    "editable": true
+                                },
+                                {
+                                    "alias": "Description",
+                                    "name": "DESCRIPTION",
+                                    "length": 1073741822,
+                                    "type": "esriFieldTypeString",
+                                    "editable": true
+                                },
+                                {
+                                    "alias": "Image URL",
+                                    "name": "IMAGE_URL",
+                                    "length": 255,
+                                    "type": "esriFieldTypeString",
+                                    "editable": true
+                                },
+                                {
+                                    "alias": "Image Link URL",
+                                    "name": "IMAGE_LINK_URL",
+                                    "length": 255,
+                                    "type": "esriFieldTypeString",
+                                    "editable": true
+                                },
+                                {
+                                    "alias": "DATE",
+                                    "name": "DATE",
+                                    "length": 36,
+                                    "type": "esriFieldTypeDate",
+                                    "editable": true
+                                },
+                                {
+                                    "alias": "Type ID",
+                                    "name": "TYPEID",
+                                    "type": "esriFieldTypeInteger",
+                                    "editable": true
+                                }
+                            ]
+                        },
+                        "popupInfo": {
+                            "mediaInfos": [
+                                {
+                                    "value": {
+                                        "sourceURL": "{IMAGE_URL}",
+                                        "linkURL": "{IMAGE_LINK_URL}"
+                                    },
+                                    "type": "image"
+                                }
+                            ],
+                            "title": "{TITLE}",
+                            "description": "{DESCRIPTION}"
+                        },
+                        "featureSet": {
+                            "geometryType": "esriGeometryPolygon",
+                            "features": []
+                        },
+                        "nextObjectId": 0
+                    },
+                    {
+                        "layerDefinition": {
+                            "objectIdField": "OBJECTID",
+                            "templates": [],
+                            "type": "Feature Layer",
+                            "drawingInfo": {
+                                "renderer": {
+                                    "field1": "TYPEID",
+                                    "type": "uniqueValue",
+                                    "uniqueValueInfos": [
+                                        {
+                                            "symbol": {
+                                                "style": "esriSLSSolid",
+                                                "color": [
+                                                    115,
+                                                    140,
+                                                    61,
+                                                    255
+                                                ],
+                                                "width": 1.5,
+                                                "type": "esriSLS"
+                                            },
+                                            "description": "",
+                                            "value": "0",
+                                            "label": "Line"
+                                        }
+                                    ]
+                                }
+                            },
+                            "displayField": "TITLE",
+                            "visibilityField": "VISIBLE",
+                            "name": "Lines",
+                            "hasAttachments": false,
+                            "typeIdField": "TYPEID",
+                            "capabilities": "Query,Editing",
+                            "types": [
+                                {
+                                    "id": 0,
+                                    "templates": [
+                                        {
+                                            "drawingTool": "esriFeatureEditToolLine",
+                                            "description": "",
+                                            "name": "Line",
+                                            "prototype": {
+                                                "attributes": {
+                                                    "VISIBLE": 1,
+                                                    "TITLE": "Line",
+                                                    "TYPEID": 0
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "drawingTool": "esriFeatureEditToolFreehand",
+                                            "description": "",
+                                            "name": "Freehand Line",
+                                            "prototype": {
+                                                "attributes": {
+                                                    "VISIBLE": 1,
+                                                    "TITLE": "Line",
+                                                    "TYPEID": 0
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "domains": {},
+                                    "name": "Line"
+                                }
+                            ],
+                            "geometryType": "esriGeometryPolyline",
+                            "fields": [
+                                {
+                                    "alias": "OBJECTID",
+                                    "name": "OBJECTID",
+                                    "type": "esriFieldTypeOID",
+                                    "editable": false
+                                },
+                                {
+                                    "alias": "Title",
+                                    "name": "TITLE",
+                                    "length": 50,
+                                    "type": "esriFieldTypeString",
+                                    "editable": true
+                                },
+                                {
+                                    "alias": "Visible",
+                                    "name": "VISIBLE",
+                                    "type": "esriFieldTypeInteger",
+                                    "editable": true
+                                },
+                                {
+                                    "alias": "Description",
+                                    "name": "DESCRIPTION",
+                                    "length": 1073741822,
+                                    "type": "esriFieldTypeString",
+                                    "editable": true
+                                },
+                                {
+                                    "alias": "Image URL",
+                                    "name": "IMAGE_URL",
+                                    "length": 255,
+                                    "type": "esriFieldTypeString",
+                                    "editable": true
+                                },
+                                {
+                                    "alias": "Image Link URL",
+                                    "name": "IMAGE_LINK_URL",
+                                    "length": 255,
+                                    "type": "esriFieldTypeString",
+                                    "editable": true
+                                },
+                                {
+                                    "alias": "DATE",
+                                    "name": "DATE",
+                                    "length": 36,
+                                    "type": "esriFieldTypeDate",
+                                    "editable": true
+                                },
+                                {
+                                    "alias": "Type ID",
+                                    "name": "TYPEID",
+                                    "type": "esriFieldTypeInteger",
+                                    "editable": true
+                                }
+                            ]
+                        },
+                        "popupInfo": {
+                            "mediaInfos": [
+                                {
+                                    "value": {
+                                        "sourceURL": "{IMAGE_URL}",
+                                        "linkURL": "{IMAGE_LINK_URL}"
+                                    },
+                                    "type": "image"
+                                }
+                            ],
+                            "title": "{TITLE}",
+                            "description": "{DESCRIPTION}"
+                        },
+                        "featureSet": {
+                            "geometryType": "esriGeometryPolyline",
+                            "features": []
+                        },
+                        "nextObjectId": 0
+                    },
+                    {
+                        "layerDefinition": {
+                            "objectIdField": "OBJECTID",
+                            "templates": [],
+                            "type": "Feature Layer",
+                            "drawingInfo": {
+                                "renderer": {
+                                    "field1": "TYPEID",
+                                    "type": "uniqueValue",
+                                    "uniqueValueInfos": [
+                                        {
+                                            "symbol": {
+                                                "horizontalAlignment": "left",
+                                                "verticalAlignment": "baseline",
+                                                "color": [
+                                                    0,
+                                                    0,
+                                                    0,
+                                                    255
+                                                ],
+                                                "font": {
+                                                    "weight": "bold",
+                                                    "style": "normal",
+                                                    "family": "Arial",
+                                                    "size": 12
+                                                },
+                                                "type": "esriTS"
+                                            },
+                                            "description": "",
+                                            "value": "0",
+                                            "label": "Text"
+                                        }
+                                    ]
+                                }
+                            },
+                            "displayField": "TITLE",
+                            "visibilityField": "VISIBLE",
+                            "name": "Text",
+                            "hasAttachments": false,
+                            "typeIdField": "TYPEID",
+                            "capabilities": "Query,Editing",
+                            "types": [
+                                {
+                                    "id": 0,
+                                    "templates": [
+                                        {
+                                            "drawingTool": "esriFeatureEditToolText",
+                                            "description": "",
+                                            "name": "Text",
+                                            "prototype": {
+                                                "attributes": {
+                                                    "VISIBLE": 1,
+                                                    "TYPEID": 0
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "domains": {},
+                                    "name": "Text"
+                                }
+                            ],
+                            "geometryType": "esriGeometryPoint",
+                            "fields": [
+                                {
+                                    "alias": "OBJECTID",
+                                    "name": "OBJECTID",
+                                    "type": "esriFieldTypeOID",
+                                    "editable": false
+                                },
+                                {
+                                    "alias": "Title",
+                                    "name": "TITLE",
+                                    "length": 50,
+                                    "type": "esriFieldTypeString",
+                                    "editable": true
+                                },
+                                {
+                                    "alias": "Visible",
+                                    "name": "VISIBLE",
+                                    "type": "esriFieldTypeInteger",
+                                    "editable": true
+                                },
+                                {
+                                    "alias": "Description",
+                                    "name": "DESCRIPTION",
+                                    "length": 1073741822,
+                                    "type": "esriFieldTypeString",
+                                    "editable": true
+                                },
+                                {
+                                    "alias": "Image URL",
+                                    "name": "IMAGE_URL",
+                                    "length": 255,
+                                    "type": "esriFieldTypeString",
+                                    "editable": true
+                                },
+                                {
+                                    "alias": "Image Link URL",
+                                    "name": "IMAGE_LINK_URL",
+                                    "length": 255,
+                                    "type": "esriFieldTypeString",
+                                    "editable": true
+                                },
+                                {
+                                    "alias": "DATE",
+                                    "name": "DATE",
+                                    "length": 36,
+                                    "type": "esriFieldTypeDate",
+                                    "editable": true
+                                },
+                                {
+                                    "alias": "Type ID",
+                                    "name": "TYPEID",
+                                    "type": "esriFieldTypeInteger",
+                                    "editable": true
+                                },
+                                {
+                                    "alias": "Text",
+                                    "name": "TEXT",
+                                    "length": 255,
+                                    "type": "esriFieldTypeString",
+                                    "editable": true
+                                }
+                            ]
+                        },
+                        "popupInfo": {
+                            "title": "{TITLE}",
+                            "description": "{DESCRIPTION}",
+                            "mediaInfos": [
+                                {
+                                    "type": "image",
+                                    "value": {
+                                        "sourceURL": "{IMAGE_URL}",
+                                        "linkURL": "{IMAGE_LINK_URL}"
+                                    }
+                                }
+                            ]
+                        },
+                        "featureSet": {
+                            "geometryType": "esriGeometryPoint",
+                            "features": []
+                        },
+                        "nextObjectId": 0
+                    },
+                    {
+                        "layerDefinition": {
+                            "objectIdField": "OBJECTID",
+                            "templates": [],
+                            "type": "Feature Layer",
+                            "drawingInfo": {
+                                "renderer": {
+                                    "field1": "TYPEID",
+                                    "type": "uniqueValue",
+                                    "uniqueValueInfos": [
+                                        {
+                                            "symbol": {
+                                                "height": 24,
+                                                "xoffset": 0,
+                                                "yoffset": 12,
+                                                "width": 24,
+                                                "contentType": "image/png",
+                                                "type": "esriPMS",
+                                                "url": "http://static.arcgis.com/images/Symbols/Basic/GreenStickpin.png"
+                                            },
+                                            "description": "",
+                                            "value": "0",
+                                            "label": "Stickpin"
+                                        },
+                                        {
+                                            "symbol": {
+                                                "height": 24,
+                                                "xoffset": 2,
+                                                "yoffset": 8,
+                                                "width": 24,
+                                                "contentType": "image/png",
+                                                "type": "esriPMS",
+                                                "url": "http://static.arcgis.com/images/Symbols/Basic/GreenShinyPin.png"
+                                            },
+                                            "value": "1",
+                                            "label": "Pushpin"
+                                        },
+                                        {
+                                            "symbol": {
+                                                "style": "esriSMSCross",
+                                                "color": [
+                                                    155,
+                                                    187,
+                                                    89,
+                                                    128
+                                                ],
+                                                "outline": {
+                                                    "style": "esriSLSSolid",
+                                                    "color": [
+                                                        115,
+                                                        140,
+                                                        61,
+                                                        255
+                                                    ],
+                                                    "width": 1,
+                                                    "type": "esriSLS"
+                                                },
+                                                "type": "esriSMS",
+                                                "size": 18
+                                            },
+                                            "value": "2",
+                                            "label": "Cross"
+                                        }
+                                    ]
+                                }
+                            },
+                            "displayField": "TITLE",
+                            "visibilityField": "VISIBLE",
+                            "name": "Points",
+                            "hasAttachments": false,
+                            "typeIdField": "TYPEID",
+                            "capabilities": "Query,Editing",
+                            "types": [
+                                {
+                                    "id": 0,
+                                    "templates": [
+                                        {
+                                            "drawingTool": "esriFeatureEditToolPoint",
+                                            "description": "",
+                                            "name": "Stickpin",
+                                            "prototype": {
+                                                "attributes": {
+                                                    "VISIBLE": 1,
+                                                    "TITLE": "Point",
+                                                    "TYPEID": 0
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "domains": {},
+                                    "name": "Stickpin"
+                                },
+                                {
+                                    "id": 1,
+                                    "templates": [
+                                        {
+                                            "drawingTool": "esriFeatureEditToolPoint",
+                                            "description": "",
+                                            "name": "Pushpin",
+                                            "prototype": {
+                                                "attributes": {
+                                                    "VISIBLE": 1,
+                                                    "TITLE": "Point",
+                                                    "TYPEID": 1
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "domains": {},
+                                    "name": "Pushpin"
+                                },
+                                {
+                                    "id": 2,
+                                    "templates": [
+                                        {
+                                            "drawingTool": "esriFeatureEditToolPoint",
+                                            "description": "",
+                                            "name": "Cross",
+                                            "prototype": {
+                                                "attributes": {
+                                                    "VISIBLE": 1,
+                                                    "TITLE": "Point",
+                                                    "TYPEID": 2
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "domains": {},
+                                    "name": "Cross"
+                                }
+                            ],
+                            "geometryType": "esriGeometryPoint",
+                            "fields": [
+                                {
+                                    "alias": "OBJECTID",
+                                    "name": "OBJECTID",
+                                    "type": "esriFieldTypeOID",
+                                    "editable": false
+                                },
+                                {
+                                    "alias": "Title",
+                                    "name": "TITLE",
+                                    "length": 50,
+                                    "type": "esriFieldTypeString",
+                                    "editable": true
+                                },
+                                {
+                                    "alias": "Visible",
+                                    "name": "VISIBLE",
+                                    "type": "esriFieldTypeInteger",
+                                    "editable": true
+                                },
+                                {
+                                    "alias": "Description",
+                                    "name": "DESCRIPTION",
+                                    "length": 1073741822,
+                                    "type": "esriFieldTypeString",
+                                    "editable": true
+                                },
+                                {
+                                    "alias": "Image URL",
+                                    "name": "IMAGE_URL",
+                                    "length": 255,
+                                    "type": "esriFieldTypeString",
+                                    "editable": true
+                                },
+                                {
+                                    "alias": "Image Link URL",
+                                    "name": "IMAGE_LINK_URL",
+                                    "length": 255,
+                                    "type": "esriFieldTypeString",
+                                    "editable": true
+                                },
+                                {
+                                    "alias": "DATE",
+                                    "name": "DATE",
+                                    "length": 36,
+                                    "type": "esriFieldTypeDate",
+                                    "editable": true
+                                },
+                                {
+                                    "alias": "Type ID",
+                                    "name": "TYPEID",
+                                    "type": "esriFieldTypeInteger",
+                                    "editable": true
+                                }
+                            ]
+                        },
+                        "popupInfo": {
+                            "mediaInfos": [
+                                {
+                                    "value": {
+                                        "sourceURL": "{IMAGE_URL}",
+                                        "linkURL": "{IMAGE_LINK_URL}"
+                                    },
+                                    "type": "image"
+                                }
+                            ],
+                            "title": "{TITLE}",
+                            "description": "{DESCRIPTION}"
+                        },
+                        "featureSet": {
+                            "geometryType": "esriGeometryPoint",
+                            "features": [
+                                {
+                                    "geometry": {
+                                        "x": -16374994.766762476,
+                                        "y": 8630749.823494691,
+                                        "spatialReference": {
+                                            "wkid": 102100
+                                        }
+                                    },
+                                    "attributes": {
+                                        "VISIBLE": 1,
+                                        "TITLE": "Mouth of the Columbia Glacier, 1990",
+                                        "TYPEID": 0,
+                                        "OBJECTID": 0
+                                    },
+                                    "symbol": {
+                                        "angle": 0,
+                                        "xoffset": 0,
+                                        "yoffset": 9,
+                                        "type": "esriPMS",
+                                        "url": "http://static.arcgis.com/images/Symbols/Shapes/PurplePin1LargeB.png",
+                                        "imageData": "iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAADImlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjAgNjEuMTM0Nzc3LCAyMDEwLzAyLzEyLTE3OjMyOjAwICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpDNjc2MDJCQUQzM0IxMUUwQUU5NUVFMEYwMTY0NzUwNSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpDNjc2MDJCQkQzM0IxMUUwQUU5NUVFMEYwMTY0NzUwNSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkM2NzYwMkI4RDMzQjExRTBBRTk1RUUwRjAxNjQ3NTA1IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkM2NzYwMkI5RDMzQjExRTBBRTk1RUUwRjAxNjQ3NTA1Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQg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",
+                                        "contentType": "image/png",
+                                        "width": 21,
+                                        "height": 21
+                                    }
+                                },
+                                {
+                                    "geometry": {
+                                        "x": -16375759.137045328,
+                                        "y": 8651846.443301408,
+                                        "spatialReference": {
+                                            "wkid": 102100
+                                        }
+                                    },
+                                    "attributes": {
+                                        "VISIBLE": 1,
+                                        "TITLE": "Mouth of Columbia Glacier today",
+                                        "TYPEID": 0,
+                                        "OBJECTID": 1
+                                    },
+                                    "symbol": {
+                                        "angle": 0,
+                                        "xoffset": 0,
+                                        "yoffset": 9,
+                                        "type": "esriPMS",
+                                        "url": "http://static.arcgis.com/images/Symbols/Shapes/RedPin1LargeB.png",
+                                        "imageData": "iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAADImlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjAgNjEuMTM0Nzc3LCAyMDEwLzAyLzEyLTE3OjMyOjAwICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo1MzA4NzI3NkQyN0MxMUUwQUU5NUVFMEYwMTY0NzUwNSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo1MzA4NzI3N0QyN0MxMUUwQUU5NUVFMEYwMTY0NzUwNSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjUzMDg3Mjc0RDI3QzExRTBBRTk1RUUwRjAxNjQ3NTA1IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjUzMDg3Mjc1RDI3QzExRTBBRTk1RUUwRjAxNjQ3NTA1Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQg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",
+                                        "contentType": "image/png",
+                                        "width": 21,
+                                        "height": 21
+                                    }
+                                }
+                            ]
+                        },
+                        "nextObjectId": 2
+                    }
+                ]
+            },
+            "opacity": 1,
+            "visibility": true
+        }
+    ],
+    "baseMap": {
+        "baseMapLayers": [
+            {
+                "id": "World_Imagery_1935",
+                "opacity": 1,
+                "visibility": true,
+                "url": "http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer"
+            }
+        ],
+        "title": "Imagery"
+    },
+    "widgets": {
+        "editor": {},
+        "timeSlider": {
+            "properties": {
+                "startTime": 631152000000,
+                "endTime": 1262217661000,
+                "thumbCount": 2,
+                "thumbMovingRate": 2000,
+                "timeStopInterval": {
+                    "interval": 2,
+                    "units": "esriTimeUnitsYears"
+                }
+            }
+        }
+    },
+    "version": "1.5"
+}

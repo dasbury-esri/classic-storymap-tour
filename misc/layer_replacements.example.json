@@ -1,0 +1,7 @@
+[
+  {
+    "match_layer_id": "NaturalWithAtmosphereRemoval_141",
+    "match_url_contains": "LandsatGLS/NaturalWithAtmosphereRemoval/ImageServer",
+    "replacement_item_id": "52484b28322542ce97cff79046978f9e"
+  }
+]
